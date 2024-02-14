@@ -1,0 +1,3 @@
+this is a configuration folder
+
+here we put every configuration related with the app
