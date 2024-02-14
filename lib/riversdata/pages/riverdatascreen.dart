@@ -20,7 +20,10 @@ class _RiverDataScreenState extends State<RiverDataScreen> {
 
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 
-    Provider.of<RiverDataProvider>(context,listen: false).getAllData();
+    Provider.of<RiverDataProvider>(context,listen: false).getAllData().then((value){
+ Provider.of<GraphProvider>(context,listen: false).setgraphdata(Provider.of<RiverDataProvider>(context,listen: false).allRiversDatalist);
+    });
+   
 
       });
   

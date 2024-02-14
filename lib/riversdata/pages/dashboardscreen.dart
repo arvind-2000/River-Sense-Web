@@ -38,7 +38,7 @@ class DashboardScreen extends StatelessWidget {
                       Expanded(
                     child: Container(
                       height: double.infinity,
-                      margin: const EdgeInsets.all(16),
+                      margin: const EdgeInsets.only(top:16,bottom: 16,left: 8,right: 16),
                       decoration: BoxDecoration(
                           color: Colors.white,
                         borderRadius: BorderRadius.circular(16)

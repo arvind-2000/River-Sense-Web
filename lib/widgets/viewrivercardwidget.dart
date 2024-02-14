@@ -50,11 +50,11 @@ class ViewRiverCard extends StatelessWidget {
                 ),
                       child: Row(
                         children: [
-                          Text(riverDetails.river.last.usv),
+                          Text(toDouble(riverDetails.river.last.usv).toStringAsFixed(0)),
                           SizedBox(width: 10,),
-                          Text(riverDetails.river.last.hv),
+                          Text(toDouble(riverDetails.river.last.hv).toStringAsFixed(0)),
                           SizedBox(width: 10,),
-                          Text(riverDetails.river.last.tv),
+                          Text(toDouble(riverDetails.river.last.tv).toStringAsFixed(0)),
                         ],
                       ),
                     ),
