@@ -35,14 +35,15 @@ class _NavigationRailWidgetState extends State<NavigationRailWidget> {
       },
 
       selectedIconTheme: const IconThemeData(
+
         fill: 0.4,
         size: 20),
       unselectedIconTheme: IconThemeData(color: Theme.of(context).colorScheme.surface,size: 16),
-
       backgroundColor: Theme.of(context).colorScheme.primary,
-      leading: const SizedBox(height: 200,),
+      leading: const SizedBox(height: 100,),
       useIndicator: true,
       labelType: NavigationRailLabelType.selected,
+
       destinations: const [
        NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.house), label: Text('Home')), 
        NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.chartLine), label: Text('Charts')) ,

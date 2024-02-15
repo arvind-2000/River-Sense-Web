@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:riversenseweb/tablefeatures/pages/tablescreen.dart';
 
 import '../../widgets/viewrivercardwidget.dart';
 import '../provider/riverdataprovider.dart';
@@ -43,6 +44,7 @@ class DashboardScreen extends StatelessWidget {
                           color: Colors.white,
                         borderRadius: BorderRadius.circular(16)
                       ),
+                      child: TableScreen(),
                     ),
                   ),
                 ],

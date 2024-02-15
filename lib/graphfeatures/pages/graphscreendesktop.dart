@@ -27,6 +27,12 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
     
     super.initState();
   }
+
+  void changeFilter(){
+    setState(() {
+            isFilterVisible = !isFilterVisible;
+    });
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -57,7 +63,7 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
                       child: Text(graphprovider.graphRiverindex<=2?riverprovider.allRiversDatalist[graphprovider.graphRiverindex].name:"All",style:const TextStyle(fontWeight: FontWeight.bold),),
                     ),
                     
-                    Container(
+                   isFilterVisible?const SizedBox():Container(
                       margin: const EdgeInsets.symmetric(vertical: 16,horizontal: 26),
                       padding:const EdgeInsets.all(8),
                       decoration: BoxDecoration(
@@ -66,9 +72,7 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
                       ),
                       child: IconButton(onPressed: (){
                          
-                        setState(() {
-                          isFilterVisible = !isFilterVisible;
-                        });  
+                        changeFilter();
                                   
                       }, icon: FaIcon(isFilterVisible?FontAwesomeIcons.xmark: FontAwesomeIcons.filter,size: 12,),tooltip: 'Set filters',),
             
@@ -83,7 +87,7 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
               ],
             ),
           ),
-          isFilterVisible?GraphFilterPage():SizedBox()
+          isFilterVisible?GraphFilterPage(isVisible: changeFilter,):SizedBox()
         ],
       )
       
