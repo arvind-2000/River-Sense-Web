@@ -54,14 +54,20 @@ class GraphFilterPage extends StatelessWidget {
               const Text("River",style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 10,),
               Row(
-                children: riverprovider.allRiversDatalist.asMap().entries.map((e) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                children:[Padding( padding: const EdgeInsets.only(right: 8),
+                  child: InkWell(
+                    onTap: (){
+                      graphprovider.setGraphRiverIndex(4);
+                    },
+                    child: SmallCardWidget(name:"All",selected: graphprovider.graphRiverindex>2)),
+                ) ,...riverprovider.allRiversDatalist.asMap().entries.map((e) => Padding(
+                  padding: const EdgeInsets.only(right: 8),
                   child: InkWell(
                     onTap: (){
                       graphprovider.setGraphRiverIndex(e.key);
                     },
-                    child: Text(e.value.name.split(' ')[0])),
-                )).toList(),
+                    child:SmallCardWidget(name:e.value.name.split(' ')[0],selected: graphprovider.graphRiverindex==e.key,)),
+                )).toList()]
               ),
             ],
           ),

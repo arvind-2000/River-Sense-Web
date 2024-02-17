@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
         
         ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        title: 'River Sense',
         theme:lighttheme ,
         darkTheme: darktheme,
         themeMode: ThemeMode.system,

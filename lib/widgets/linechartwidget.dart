@@ -17,24 +17,24 @@ class LineChartWidget extends StatelessWidget {
     return Container(
       padding:const EdgeInsets.all(24),
       child: LineChart(LineChartData(
-        
+        minY: 0,
         maxY: 300,
         borderData: FlBorderData(
           show: false
         ),
         gridData: const FlGridData(drawHorizontalLine: true,drawVerticalLine: false),
         titlesData: FlTitlesData(
-          leftTitles: AxisTitles(
-            sideTitles: SideTitles(showTitles: false)
+          leftTitles:const AxisTitles(
+          sideTitles: SideTitles(showTitles: false)
           ),
-             topTitles: AxisTitles(
+             topTitles:const AxisTitles(
             sideTitles: SideTitles(showTitles: false)
           ),
           bottomTitles:AxisTitles(
             axisNameWidget: Text(filternames[graphdataprovider.filtertype]),
             sideTitles: SideTitles(showTitles: true,
             interval: 1,
-            getTitlesWidget: (value, meta)=>Text(graphdataprovider.filtertype==0?months[value.toInt()]:meta.appliedInterval.toString()),
+            getTitlesWidget: (value, meta)=>Text(graphdataprovider.filtertype==0?months[value.toInt()]:graphdataprovider.graphDataList[0].river[value.toInt()].date.day.toString()),
             )
           ) ,
         ),

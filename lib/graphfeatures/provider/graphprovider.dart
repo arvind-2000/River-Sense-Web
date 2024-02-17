@@ -8,10 +8,10 @@ class GraphProvider with ChangeNotifier{
   List<RiverDetails> _riverDataList = [];
   List<RiverDetails> _graphdatalist = [];
   List<RiverDetails> get graphDataList =>_graphdatalist;
-  int filtertype = 0;
+  int filtertype = 1;
   DateTime date = DateTime(DateTime.now().year);
   int graphRiverindex = 3;
-  int graphlevelindex = 3;
+  int graphlevelindex = 0;
 
 
   void setgraphdata(List<RiverDetails> setGraphlist){
@@ -40,12 +40,12 @@ void changeData(){
   }
 
   if(filtertype==0){
-_graphdatalist = logic.getMonths(temp,date);
+_graphdatalist = logic.getMonths(temp,date)..reversed;
 }
 else{
-  _graphdatalist = logic.getDays(temp, date);
+  _graphdatalist = logic.getDays(temp, date)..reversed;
   }
-
+notifyListeners();
 }
 
 

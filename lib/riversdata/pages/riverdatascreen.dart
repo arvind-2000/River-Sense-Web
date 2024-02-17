@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:riversenseweb/graphfeatures/provider/graphprovider.dart';
 import 'package:riversenseweb/riversdata/provider/riverdataprovider.dart';
-import 'package:riversenseweb/riversdata/provider/selectionprovider.dart';
-
 import '../../widgets/navigationrailwidget.dart';
 import 'dashboardscreen.dart';
 

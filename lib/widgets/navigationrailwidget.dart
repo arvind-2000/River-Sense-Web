@@ -29,11 +29,11 @@ class _NavigationRailWidgetState extends State<NavigationRailWidget> {
       final screenSelectionindex = Provider.of<SelectionProvider>(context);
     return NavigationRail(
       minWidth: 60,
-      
+   
       onDestinationSelected: (value){
         changeRailIndex(value);
       },
-
+    
       selectedIconTheme: const IconThemeData(
 
         fill: 0.4,
@@ -42,13 +42,14 @@ class _NavigationRailWidgetState extends State<NavigationRailWidget> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       leading: const SizedBox(height: 100,),
       useIndicator: true,
-      labelType: NavigationRailLabelType.selected,
+      
+   
 
       destinations: const [
-       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.house), label: Text('Home')), 
-       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.chartLine), label: Text('Charts')) ,
-       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.tableCells), label: Text('Tables')), 
-       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.gear), label: Text('Settings')), 
+       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.house), label: Text('Home'),padding: EdgeInsets.symmetric(vertical: 20)), 
+       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.chartLine), label: Text('Charts'),padding: EdgeInsets.symmetric(vertical: 20)) ,
+       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.tableCells), label: Text('Tables'),padding: EdgeInsets.symmetric(vertical: 20)), 
+       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.gear), label: Text('Settings'),padding: EdgeInsets.symmetric(vertical: 20)), 
     ], 
     
     selectedIndex:_index
