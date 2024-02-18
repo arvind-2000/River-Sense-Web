@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         title: 'River Sense',
         theme:lighttheme ,
         darkTheme: darktheme,
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.dark,
         home: const RiverDataScreen(),
       ),
     );

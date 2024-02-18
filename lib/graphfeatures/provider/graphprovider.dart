@@ -8,11 +8,11 @@ class GraphProvider with ChangeNotifier{
   List<RiverDetails> _riverDataList = [];
   List<RiverDetails> _graphdatalist = [];
   List<RiverDetails> get graphDataList =>_graphdatalist;
-  int filtertype = 1;
+  int filtertype = 0;
   DateTime date = DateTime(DateTime.now().year);
   int graphRiverindex = 3;
   int graphlevelindex = 0;
-
+  bool islinegraph = true;
 
   void setgraphdata(List<RiverDetails> setGraphlist){
 
@@ -71,6 +71,9 @@ void setDate(DateTime date){
     changeData();
 }
 
-
+void changeGraphStyle(){
+  islinegraph = !islinegraph;
+  notifyListeners();
+}
 
 }

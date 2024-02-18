@@ -130,9 +130,30 @@ class GraphFilterPage extends StatelessWidget {
             child: SmallCardWidget(name: e.value,selected: e.key+1==graphprovider.date.month,),
           ))).toList(),
       ):const  SizedBox(),
+
+       SizedBox(height: 30,),
+          const Text("Graphs",style: TextStyle(fontWeight: FontWeight.bold)),
+          SizedBox(height: 10,),
+         Row(
+           children: [
+             InkWell(
+              onTap: (){
+                   graphprovider.changeGraphStyle();
+              },
+              child:Text("Line",style: TextStyle(color:graphprovider.islinegraph?Theme.of(context).colorScheme.secondary:Theme.of(context).colorScheme.surface),)),
+              SizedBox(width: 20,),
+             InkWell(
+                  onTap: (){
+           graphprovider.changeGraphStyle();
+              },
+              child:Text("Bar",style: TextStyle(color:!graphprovider.islinegraph?Theme.of(context).colorScheme.secondary:Theme.of(context).colorScheme.surface),)),
+           ],
+         ),
     
         ],
       ),
     ).animate().fade().slide();
   }
+  
+
 }

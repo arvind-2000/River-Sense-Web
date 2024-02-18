@@ -19,91 +19,102 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
       final riverProvider = Provider.of<RiverDataProvider>(context);
     return SizedBox(
-      child: Row(
+      child: Column(
         children: [
           Expanded(
-            flex: 3,
-            child: Column(
+            child: Row(
               children: [
                 Expanded(
-                  flex: 1,
-                  child: Container(
-                  child: Row(
-                    children: riverProvider.allRiversDatalist.map((e) =>ViewRiverCard(onPress: (){log("card 1");},riverDetails: e,)).toList(),
-                  ),
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Container(
-                    
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: GraphScreenDesktop(),
-                        ),
-              
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-                        Expanded(
+                  flex: 3,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 1,
                         child: Container(
-                          margin: EdgeInsets.only(top:16,bottom: 16,right: 16,left: 8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: Theme.of(context).colorScheme.primary
-                          ),
-                          child: Column(
+                        child: Row(
+                          children: riverProvider.allRiversDatalist.map((e) =>ViewRiverCard(onPress: (){log("card 1");},riverDetails: e,)).toList(),
+                        ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 4,
+                        child: Container(
+                          
+                          child: Row(
                             children: [
                               Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Text("Bar Graph",style: TextStyle(fontWeight: FontWeight.bold),),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        
-                                          child: BarChartScreen(),
-                                      
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                child: GraphScreenDesktop(),
                               ),
-                            Divider(),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                           Padding(
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Text("Data Reports",style: TextStyle(fontWeight: FontWeight.bold),),
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: double.infinity,
-                                        margin: const EdgeInsets.only(top:16,bottom: 16,left: 8,right: 16),
-                                        decoration: BoxDecoration(
-                                            color: Theme.of(context).colorScheme.primary,
-                                          borderRadius: BorderRadius.circular(16)
-                                        ),
-                                        child: TableScreen(),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                    
                             ],
                           ),
                         ),
-                      ),
+                      )
+                    ],
+                  ),
+                ),
+                              Expanded(
+                              child: Container(
+                                margin: EdgeInsets.only(top:16,bottom: 16,right: 16,left: 8),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color: Theme.of(context).colorScheme.primary
+                                ),
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Text("Bar Graph",style: TextStyle(fontWeight: FontWeight.bold),),
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              
+                                                child: BarChartScreen(),
+                                            
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  Divider(),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                                 Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Text("Data Reports",style: TextStyle(fontWeight: FontWeight.bold),),
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              height: double.infinity,
+                                              margin: const EdgeInsets.only(top:16,bottom: 16,left: 8,right: 16),
+                                              decoration: BoxDecoration(
+                                                  color: Theme.of(context).colorScheme.primary,
+                                                borderRadius: BorderRadius.circular(16)
+                                              ),
+                                              child: TableScreen(),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+              ],
+            ),
+          ),
+
+          Container(
+            padding: EdgeInsets.all(16),
+            child: Text("River Sense",style: TextStyle(fontSize: 12,wordSpacing: 6,letterSpacing: 4),),
+          )
         ],
       ),
     );

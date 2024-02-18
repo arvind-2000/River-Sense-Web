@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:riversenseweb/const.dart';
 import 'package:riversenseweb/graphfeatures/provider/graphprovider.dart';
+import 'package:riversenseweb/widgets/errorscreen.dart';
 
 import '../../widgets/tablelist.dart';
 
@@ -12,7 +13,7 @@ class TableScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<GraphProvider>(context);
-    return Container(
+    return prov.graphDataList.isEmpty?ErrorScreen():Container(
 
         child: SingleChildScrollView(
                   child: Column(

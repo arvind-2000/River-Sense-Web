@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riversenseweb/const.dart';
+import 'package:riversenseweb/dummiesdata.dart';
 import 'package:riversenseweb/riversdata/business/riverservices.dart';
 import 'package:riversenseweb/riversdata/models/riverdetailsentity.dart';
 
@@ -16,15 +17,23 @@ class RiverDataProvider with ChangeNotifier{
 
 
   Future<void> getAllData() async{
-    RiverService? service = RiverService();
-      await service.getdata(apicalls).then((value){
+  //   RiverService? service = RiverService();
+  //     await service.getdata(apicalls).then((value){
               
-        river_response = service!.responsecode;
-        _allRiversData = value;
-        isLoading = false;
-        notifyListeners();
-      });
-  service = null; 
+  //       river_response = service!.responsecode;
+  //       _allRiversData = value;
+  //       isLoading = false;
+  //       notifyListeners();
+  //     });
+  // service = null;
+  //
+  //TODO: dummy methods 
+  river_response = 200;
+  _allRiversData = dummies;
+  isLoading = false;
+
+  notifyListeners();
+  
   }
 
  

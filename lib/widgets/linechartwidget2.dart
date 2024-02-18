@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -42,14 +44,15 @@ class _LineChartsState extends State<LineCharts> {
       prov.graphDataList[0].river.isEmpty?const SizedBox(
         child: Center(child: Text('No Data'),),
        ):Container(
-        margin:const EdgeInsets.symmetric(horizontal: 16),
-        padding:const EdgeInsets.only(left: 24,top: 16),
+        // margin:const EdgeInsets.symmetric(horizontal: 16),
+        // padding:const EdgeInsets.only(left: 24,top: 16),
         decoration: BoxDecoration(
           
           color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(16)
         ),
          child: SfCartesianChart(
+           
             zoomPanBehavior: ZoomPanBehavior(
          
               enableMouseWheelZooming: true,
@@ -62,6 +65,7 @@ class _LineChartsState extends State<LineCharts> {
               enableSelectionZooming: true
          
             ),
+
             tooltipBehavior: TooltipBehavior(enable: true,
             color: Theme.of(context).colorScheme.primary,
             textStyle: TextStyle(color: Theme.of(context).colorScheme.surface)
@@ -77,29 +81,45 @@ class _LineChartsState extends State<LineCharts> {
             //   borderWidth: 8
             // ),
             enableAxisAnimation: true,
-              
-            primaryYAxis: NumericAxis(
-            desiredIntervals: 5,
+
+            
+            primaryYAxis:const NumericAxis(
+                 majorGridLines: MajorGridLines(
+            
+             width: 2
+           ),
+            desiredIntervals: 10,
+
               minimum: 0.0,
-              maximum:400,
+              interval: 50,
+              maximum: 300,
+              
             ),
-          primaryXAxis: DateTimeAxis(
-                  initialVisibleMinimum: DateTime(DateTime.now().year,DateTime.now().month,1),
-                  interval:10,
-                  dateFormat: DateFormat('dd-mm-y'),
+          primaryXAxis: NumericAxis(
+               majorGridLines: MajorGridLines(
+                 
+             width: 0
+           ),
+           initialVisibleMaximum: 13,
+                // axisLabelFormatter:(axisLabelRenderArgs) => ChartAxisLabel(prov.filtertype==0?months[int.parse(axisLabelRenderArgs.text)]:axisLabelRenderArgs.text, TextStyle(fontSize:12)),
+                axisLabelFormatter: prov.filtertype==0?(axisLabelRenderArgs) => ChartAxisLabel(months[int.parse(axisLabelRenderArgs.text)],const TextStyle(fontSize:12)) :null,
+                  interval:1,
+                  
+                  // maximum: prov.filtertype==0?12:null,
                   title: AxisTitle(
+                  
                     text: "Time"
                   ),
                   autoScrollingMode:AutoScrollingMode.end,
-                  autoScrollingDelta: val,
-                  autoScrollingDeltaType: DateTimeIntervalType.hours,
-            initialZoomPosition: 1,
-            initialZoomFactor: 0.2,
+                  // autoScrollingDelta: val,
+
+            // initialZoomPosition: 1,
+            // initialZoomFactor: 0.2,
            
             
                   
           ),
-          series: prov.graphDataList.asMap().entries.map((e) => linecharts(e.value, e.key,Theme.of(context).colorScheme.secondary,prov)).toList(),
+          series: prov.graphDataList.asMap().entries.map((e) =>prov.islinegraph? linecharts(e.value, e.key,Theme.of(context).colorScheme.secondary,prov) :barcharts(e.value, e.key,Theme.of(context).colorScheme.secondary,prov) ).toList(),
          ),
        ),
        Positioned(
@@ -127,9 +147,9 @@ class _LineChartsState extends State<LineCharts> {
                     }, icon:const FaIcon(FontAwesomeIcons.plus,size: 20,)),
                     IconButton(onPressed: (){
                         setState(() {
-                                 if(val>=100)
+                                 if(val>=200)
                           {
-                            val = 100;
+                            val = 200;
                           }
                             else{
                               val = val + 20;
@@ -186,7 +206,7 @@ class _LineChartsState extends State<LineCharts> {
         ],
       );
 
-  SplineAreaSeries<River, DateTime> linecharts(
+  SplineAreaSeries<River, int> linecharts(
     RiverDetails riversdata,
     int index,
     Color color,
@@ -198,21 +218,58 @@ class _LineChartsState extends State<LineCharts> {
         enableTooltip: true,
         markerSettings: MarkerSettings(
           isVisible: true,
-
+          
           color:color.withOpacity(0.4),
           borderWidth: 0,
           shape: DataMarkerType.circle
         ),
         borderColor: rivercolors[index]!,
         borderWidth: 2,
-        splineType: SplineType.natural,
+        splineType: SplineType.cardinal,
+        cardinalSplineTension: 0.3,
         gradient: LinearGradient(
             colors: [Colors.transparent, Colors.transparent],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter),
         dataSource: riversdata.river,
+        emptyPointSettings: EmptyPointSettings(
+          mode: EmptyPointMode.average
+          
+        ),
         xValueMapper: (datum, index) {
-          return datum.date;
+          return index;
+        },
+      
+        yValueMapper: (d, i) => toDouble(prov.graphlevelindex == 0
+            ? d.usv
+            : prov.graphlevelindex == 1
+                ? d.hv
+                : d.tv));
+  }
+
+
+ ChartSeries<River, int> linechartv2(
+    RiverDetails riversdata,
+    int index,
+    Color color,
+    GraphProvider prov
+  ) {
+    return LineSeries(
+        animationDelay: 1,
+        animationDuration: 0.3,
+        enableTooltip: true,
+        
+        markerSettings: MarkerSettings(
+          isVisible: true,
+        
+          color:color.withOpacity(0.4),
+          borderWidth: 0,
+          shape: DataMarkerType.circle
+        ),
+
+        dataSource: riversdata.river,
+        xValueMapper: (datum, index) {
+          return index;
         },
         yValueMapper: (d, i) => toDouble(prov.graphlevelindex == 0
             ? d.usv
@@ -220,4 +277,42 @@ class _LineChartsState extends State<LineCharts> {
                 ? d.hv
                 : d.tv));
   }
+
+
+
+  ColumnSeries<River, int> barcharts(
+    RiverDetails riversdata,
+    int index,
+    Color color,
+    GraphProvider prov
+  ) {
+    return ColumnSeries(
+        animationDelay: 1,
+        animationDuration: 0.3,
+        enableTooltip: true,
+        trackColor: Colors.red,
+        onPointTap: (c){
+          log("DataPoint: ${c.seriesIndex}");
+        },
+        color: rivercolors[index]!.withOpacity(0.6),
+        borderColor: rivercolors[index]!,
+        borderWidth: 1,
+        spacing: 0.3,
+        // splineType: SplineType.natural,
+        // gradient: LinearGradient(
+        //     colors: [Colors.transparent, Colors.transparent],
+        //     begin: Alignment.topCenter,
+        //     end: Alignment.bottomCenter),
+        dataSource: riversdata.river,
+        xValueMapper: (datum, index) {
+          return index;
+        },
+        yValueMapper: (d, i) => toDouble(prov.graphlevelindex == 0
+            ? d.usv
+            : prov.graphlevelindex == 1
+                ? d.hv
+                : d.tv));
+  }
+
 }
+

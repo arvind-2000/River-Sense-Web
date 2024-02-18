@@ -29,27 +29,37 @@ class _NavigationRailWidgetState extends State<NavigationRailWidget> {
       final screenSelectionindex = Provider.of<SelectionProvider>(context);
     return NavigationRail(
       minWidth: 60,
-   
+      
       onDestinationSelected: (value){
         changeRailIndex(value);
       },
-    
-      selectedIconTheme: const IconThemeData(
 
-        fill: 0.4,
+      selectedIconTheme: IconThemeData(
+          color: Colors.white,
+        
         size: 20),
+      
+
+      selectedLabelTextStyle: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).colorScheme.surface),
       unselectedIconTheme: IconThemeData(color: Theme.of(context).colorScheme.surface,size: 16),
       backgroundColor: Theme.of(context).colorScheme.primary,
       leading: const SizedBox(height: 100,),
       useIndicator: true,
-      
-   
+      labelType: NavigationRailLabelType.all,
 
       destinations: const [
-       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.house), label: Text('Home'),padding: EdgeInsets.symmetric(vertical: 20)), 
-       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.chartLine), label: Text('Charts'),padding: EdgeInsets.symmetric(vertical: 20)) ,
-       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.tableCells), label: Text('Tables'),padding: EdgeInsets.symmetric(vertical: 20)), 
-       NavigationRailDestination(icon: FaIcon(FontAwesomeIcons.gear), label: Text('Settings'),padding: EdgeInsets.symmetric(vertical: 20)), 
+       NavigationRailDestination(
+         padding: EdgeInsets.symmetric(vertical: 40),
+         icon: FaIcon(FontAwesomeIcons.house), label: Text('Home')), 
+       NavigationRailDestination(
+          padding: EdgeInsets.symmetric(vertical: 40),
+         icon: FaIcon(FontAwesomeIcons.chartLine), label: Text('Charts')) ,
+       NavigationRailDestination(
+          padding: EdgeInsets.symmetric(vertical: 40),
+         icon: FaIcon(FontAwesomeIcons.tableCells), label: Text('Tables')), 
+       NavigationRailDestination(
+          padding: EdgeInsets.symmetric(vertical: 40),
+         icon: FaIcon(FontAwesomeIcons.gear), label: Text('Settings')), 
     ], 
     
     selectedIndex:_index

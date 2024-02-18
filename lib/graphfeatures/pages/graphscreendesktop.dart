@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:riversenseweb/graphfeatures/provider/graphprovider.dart';
 import 'package:riversenseweb/riversdata/provider/riverdataprovider.dart';
+import 'package:riversenseweb/widgets/errorscreen.dart';
 import 'package:riversenseweb/widgets/linechartwidget2.dart';
 import '../../const.dart';
 import 'graphfilterpage.dart';
@@ -37,7 +38,7 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
     final graphprovider = Provider.of<GraphProvider>(context);
     final riverprovider = Provider.of<RiverDataProvider>(context);
     
-    return Container(
+    return graphprovider.graphDataList.isEmpty?ErrorScreen():Container(
       height: double.infinity,
       margin: const EdgeInsets.only(top: 16,bottom: 16,left: 16,right: 8),
       padding: const EdgeInsets.all(16),
@@ -86,7 +87,7 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
             
                   ],
                 ),
-                Expanded(child: LineCharts(isPinching: false,showcolorindicator: true,)),
+                Expanded(child:  LineCharts(isPinching: false,showcolorindicator: true,)),
            
                 
               ],
