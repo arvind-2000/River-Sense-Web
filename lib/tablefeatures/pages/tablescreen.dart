@@ -31,15 +31,16 @@ class TableScreen extends StatelessWidget {
                             Theme.of(context).colorScheme.primary.withOpacity(0.3),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          
                           children: [
                             Expanded(
                               child: ListView(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 children: [
-                                    const Center(child: FaIcon(FontAwesomeIcons.calendar,size: 16,)),
-                                    SizedBox(height: 3,),
-                                  Center(child: Text(getDate(prov.date))),
+                                  //   const Center(child: FaIcon(FontAwesomeIcons.calendar,size: 16,)),
+                                  //   SizedBox(height: 3,),
+                                  // Center(child: Text(getDate(prov.date))),
                                 
                                   ...prov.graphDataList[0]
                                       .river

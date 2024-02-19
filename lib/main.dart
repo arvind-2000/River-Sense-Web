@@ -4,6 +4,7 @@ import 'package:riversenseweb/configurations/themes/darkthemes.dart';
 import 'package:riversenseweb/configurations/themes/lighttheme.dart';
 import 'package:riversenseweb/graphfeatures/provider/graphprovider.dart';
 import 'package:riversenseweb/riversdata/pages/riverdatascreen.dart';
+import 'package:riversenseweb/riversdata/pages/riverdetailsscreen.dart';
 import 'package:riversenseweb/riversdata/provider/riverdataprovider.dart';
 import 'package:riversenseweb/riversdata/provider/selectionprovider.dart';
 
@@ -29,8 +30,12 @@ class MyApp extends StatelessWidget {
         title: 'River Sense',
         theme:lighttheme ,
         darkTheme: darktheme,
-        themeMode: ThemeMode.dark,
+        themeMode: ThemeMode.light,
         home: const RiverDataScreen(),
+        
+        routes: {
+          RiverDetailScreen.routename:(context) => const RiverDetailScreen()
+        },
       ),
     );
   }

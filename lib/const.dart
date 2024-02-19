@@ -29,10 +29,19 @@ const templevel = "°C";
 const List<String> filternames = ['Monthly','Days'];
 const Map<int,String> graphIntervals = {0:'latest',1:'1D',2:'1M',3:'1Y'};
 List<String> sensorslist = ['Levels','Humidity','Temp'];
-List<Color?> rivercolors = [Colors.blue,Colors.brown,Colors.green];
+List<Color?> rivercolors = [Colors.greenAccent,Colors.blueAccent,Colors.redAccent];
 
 List<String>  months = ['Jan','Feb','Mar','Apl','May','June','July','Aug','Sep','Oct','Nov','Dec'];
 const alertbannertext = 'Danger';
+
+const String graphdetail = '''This is the datapoints for all the rivers, gathered from the sensor device.
+It is filtered out and shown only the related datapoints.
+For more specific data. Press the filter button on the right.''';
+const String tabledetail = '''This is the datapoints for all the rivers, gathered from the sensor device.
+It is filtered out and shown only the related datapoints.
+For more specific data. Press the filter button on the right.''';
+const predictiondetail = '''Water level forecast for the next 
+$checktime minutes.''';
 BoxDecoration carddecoration = BoxDecoration(
   color: Colors.white,
   borderRadius: BorderRadius.circular(radius)
@@ -51,6 +60,8 @@ double toDouble(String d){
   }
   return _value;
 }
+
+
 
 
 String getDate(DateTime date){

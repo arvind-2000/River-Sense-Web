@@ -9,6 +9,7 @@ class RiverDataProvider with ChangeNotifier{
   List<RiverDetails> _allRiversData = [];
 
   List<RiverDetails> get allRiversDatalist => _allRiversData; 
+  List<RiverDetails> _predictionDatalist = [];
 
   bool isLoading = true;
   int river_response = 0;
@@ -17,24 +18,27 @@ class RiverDataProvider with ChangeNotifier{
 
 
   Future<void> getAllData() async{
-  //   RiverService? service = RiverService();
-  //     await service.getdata(apicalls).then((value){
+    RiverService? service = RiverService();
+      await service.getdata(apicalls).then((value){
               
-  //       river_response = service!.responsecode;
-  //       _allRiversData = value;
-  //       isLoading = false;
-  //       notifyListeners();
-  //     });
-  // service = null;
+        river_response = service!.responsecode;
+        _allRiversData = value;
+        isLoading = false;
+        notifyListeners();
+      });
+  service = null;
   //
   //TODO: dummy methods 
-  river_response = 200;
-  _allRiversData = dummies;
-  isLoading = false;
+  // river_response = 200;
+  // _allRiversData = dummies;
+  // isLoading = false;
 
   notifyListeners();
   
   }
+
+
+
 
  
 

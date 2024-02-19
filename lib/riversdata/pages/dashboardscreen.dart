@@ -3,7 +3,10 @@ import 'dart:developer';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:riversenseweb/const.dart';
+import 'package:riversenseweb/riversdata/pages/riverdetailsscreen.dart';
 import 'package:riversenseweb/tablefeatures/pages/tablescreen.dart';
+import 'package:riversenseweb/widgets/smallcardwidget.dart';
 
 import '../../BarChartfeatures/pages/barchartscreen.dart';
 import '../../widgets/viewrivercardwidget.dart';
@@ -32,7 +35,11 @@ class DashboardScreen extends StatelessWidget {
                         flex: 1,
                         child: Container(
                         child: Row(
-                          children: riverProvider.allRiversDatalist.map((e) =>ViewRiverCard(onPress: (){log("card 1");},riverDetails: e,)).toList(),
+                          children: riverProvider.allRiversDatalist.map((e) =>ViewRiverCard(onPress: (){
+
+                              Navigator.pushNamed(context, RiverDetailScreen.routename,arguments: e);
+
+                          },riverDetails: e,)).toList(),
                         ),
                         ),
                       ),
@@ -61,18 +68,23 @@ class DashboardScreen extends StatelessWidget {
                                   color: Theme.of(context).colorScheme.primary
                                 ),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Expanded(
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          const Padding(
+                                            padding: EdgeInsets.all(16.0),
+                                            child: Text("Predictions",style: TextStyle(fontSize: 20,),)
+                                          ),
                                           Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Text("Bar Graph",style: TextStyle(fontWeight: FontWeight.bold),),
+                                            padding: const EdgeInsets.symmetric(horizontal:16.0),
+                                            child: Text(predictiondetail,style: TextStyle(fontSize: 12,color: Theme.of(context).colorScheme.surface.withOpacity(0.6)),)
                                           ),
                                           Expanded(
                                             child: Container(
-                                              
+
                                                 child: BarChartScreen(),
                                             
                                             ),
@@ -85,9 +97,18 @@ class DashboardScreen extends StatelessWidget {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                                 Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Text("Data Reports",style: TextStyle(fontWeight: FontWeight.bold),),
+                                                 const Padding(
+                                            padding: EdgeInsets.all(16.0),
+                                            child: Text("Data Reports",style: TextStyle(fontSize: 20),),
+                                          ),
+                                          Row(
+                                            children: [
+                                              Expanded(child: Center(child: Text('Date'))),
+                                              ...riverProvider.allRiversDatalist.map((e) =>  Expanded(child: Center(child: Text(e.name.split(' ')[0]))),).toList()
+                                             
+                                          
+                                         
+                                            ],
                                           ),
                                           Expanded(
                                             child: Container(

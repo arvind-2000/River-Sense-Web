@@ -46,6 +46,7 @@ class _LineChartsState extends State<LineCharts> {
        ):Container(
         // margin:const EdgeInsets.symmetric(horizontal: 16),
         // padding:const EdgeInsets.only(left: 24,top: 16),
+        padding: EdgeInsets.only(right:16),
         decoration: BoxDecoration(
           
           color: Theme.of(context).colorScheme.primary,
@@ -71,6 +72,7 @@ class _LineChartsState extends State<LineCharts> {
             textStyle: TextStyle(color: Theme.of(context).colorScheme.surface)
             ),
             borderWidth: 0,
+        
             borderColor: Colors.transparent,
             margin: EdgeInsets.zero,
             plotAreaBorderColor: Colors.transparent,
@@ -84,9 +86,10 @@ class _LineChartsState extends State<LineCharts> {
 
             
             primaryYAxis:const NumericAxis(
+    
                  majorGridLines: MajorGridLines(
             
-             width: 2
+             width: 0
            ),
             desiredIntervals: 10,
 
@@ -130,38 +133,43 @@ class _LineChartsState extends State<LineCharts> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Row(
-                  children:[
-                    IconButton(onPressed: (){
-                          setState(() {
-                            if(val<=20)
-                          {
-                            val = 20;
-                          }
-                            else{
-                              val = val - 20;
-                            }
-                          });
+                // Row(
+                //   children:[
+                //     IconButton(onPressed: (){
+                //           setState(() {
+                //             if(val<=20)
+                //           {
+                //             val = 20;
+                //           }
+                //             else{
+                //               val = val - 20;
+                //             }
+                //           });
                 
                       
-                    }, icon:const FaIcon(FontAwesomeIcons.plus,size: 20,)),
-                    IconButton(onPressed: (){
-                        setState(() {
-                                 if(val>=200)
-                          {
-                            val = 200;
-                          }
-                            else{
-                              val = val + 20;
-                            }
-                        });
+                //     }, icon:const FaIcon(FontAwesomeIcons.plus,size: 20,)),
+                //     IconButton(onPressed: (){
+                //         setState(() {
+                //                  if(val>=200)
+                //           {
+                //             val = 200;
+                //           }
+                //             else{
+                //               val = val + 20;
+                //             }
+                //         });
                 
-                    }, icon:const FaIcon(FontAwesomeIcons.minus,size: 16,),hoverColor: Theme.of(context).colorScheme.secondary,),
-                  ]
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Text(prov.graphlevelindex==0?levelunit:prov.graphlevelindex==1?humiditylevel:templevel),
+                //     }, icon:const FaIcon(FontAwesomeIcons.minus,size: 16,),hoverColor: Theme.of(context).colorScheme.secondary,),
+                //   ]
+                // ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.3)
+                  ),
+                  child: Text(prov.graphlevelindex==0?"Levels in $levelunit":prov.graphlevelindex==1?"Humidity in $humiditylevel":"Temperature in $templevel"),
                 )
               ],
             ),
@@ -228,7 +236,7 @@ class _LineChartsState extends State<LineCharts> {
         splineType: SplineType.cardinal,
         cardinalSplineTension: 0.3,
         gradient: LinearGradient(
-            colors: [Colors.transparent, Colors.transparent],
+            colors: [rivercolors[index]!.withOpacity(0.2), Colors.transparent],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter),
         dataSource: riversdata.river,
@@ -294,10 +302,10 @@ class _LineChartsState extends State<LineCharts> {
         onPointTap: (c){
           log("DataPoint: ${c.seriesIndex}");
         },
-        color: rivercolors[index]!.withOpacity(0.6),
+        color: rivercolors[index]!,
         borderColor: rivercolors[index]!,
         borderWidth: 1,
-        spacing: 0.3,
+       
         // splineType: SplineType.natural,
         // gradient: LinearGradient(
         //     colors: [Colors.transparent, Colors.transparent],

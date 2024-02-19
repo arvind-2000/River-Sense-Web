@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:riversenseweb/const.dart';
 import 'package:riversenseweb/riversdata/models/riverdetailsentity.dart';
 
@@ -51,12 +52,28 @@ cursor: MouseCursor.uncontrolled,
                     borderRadius: BorderRadius.circular(16),
                   ),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(toDouble(riverDetails.river.last.usv).toStringAsFixed(0)),
-                            SizedBox(width: 10,),
-                            Text(toDouble(riverDetails.river.last.hv).toStringAsFixed(0)),
-                            SizedBox(width: 10,),
-                            Text(toDouble(riverDetails.river.last.tv).toStringAsFixed(0)),
+                            Row(
+                              children: [
+                                const FaIcon(FontAwesomeIcons.arrowTurnUp,size: 12,),
+                                Text(" ${toDouble(riverDetails.river.last.usv).toStringAsFixed(0)} $levelunit"),
+                              ],
+                            ),
+                        
+                            Row(
+                              children: [
+                                 const FaIcon(FontAwesomeIcons.temperatureHalf,size: 12,),
+                                Text(" ${toDouble(riverDetails.river.last.hv).toStringAsFixed(0)} $humiditylevel"),
+                              ],
+                            ),
+                     
+                            Row(
+                              children: [
+                              const FaIcon(FontAwesomeIcons.temperatureEmpty,size: 12,),
+                                Text(" ${toDouble(riverDetails.river.last.tv).toStringAsFixed(0)} $templevel"),
+                              ],
+                            ),
                           ],
                         ),
                       ),

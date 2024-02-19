@@ -53,22 +53,25 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
           Expanded(
             flex: 2,
             child: Column(
+              crossAxisAlignment:CrossAxisAlignment.end,
               children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(graphprovider.graphRiverindex<=2?riverprovider.allRiversDatalist[graphprovider.graphRiverindex].name:"All",style:const TextStyle(fontWeight: FontWeight.bold),),
-                    ),
-                      Row(
-                        children:graphprovider.graphDataList.asMap().entries.map((e) => Container(
-                          padding: EdgeInsets.all(4),
-                          child: Row(children: [
-                            FaIcon(FontAwesomeIcons.circle,color: rivercolors[e.key],size: 10,),
-                            SizedBox(width: 10,),
-                            Text(e.value.name.split(' ')[0])],))).toList(),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text("Monthly River Levels",style: TextStyle(fontSize: 24,letterSpacing: 3),),
+                          SizedBox(height: 10,),
+                          Text(graphdetail,style: TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.surface.withOpacity(0.6)),),
+                          const SizedBox(height: 20,),
+                          Text(graphprovider.graphRiverindex<=2?riverprovider.allRiversDatalist[graphprovider.graphRiverindex].name:"All Rivers",style:const TextStyle(fontWeight: FontWeight.bold),),
+                        ],
                       ),
+                    ),
+            
                    isFilterVisible?const SizedBox():Container(
                       margin: const EdgeInsets.symmetric(vertical: 16,horizontal: 26),
                       padding:const EdgeInsets.all(8),
@@ -87,6 +90,30 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
             
                   ],
                 ),
+
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                        children:graphprovider.graphDataList.asMap().entries.map((e) => Container(
+                          padding:const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                  
+                     
+                            Text(e.value.name.split(' ')[0]),
+                                   SizedBox(width: 10,),
+                                     Container(
+                            width: 10,
+                            height: 10,
+                            decoration: BoxDecoration(
+                              color: rivercolors[e.key],
+                                shape: BoxShape.circle
+                            ),
+                           ),
+                            ],))).toList(),
+                      ),
+
+
                 Expanded(child:  LineCharts(isPinching: false,showcolorindicator: true,)),
            
                 
