@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:riversenseweb/const.dart';
 import 'package:riversenseweb/dummiesdata.dart';
+import 'package:riversenseweb/graphfeatures/business/logics.dart';
 import 'package:riversenseweb/riversdata/business/riverservices.dart';
 import 'package:riversenseweb/riversdata/models/riverdetailsentity.dart';
 
-class RiverDataProvider with ChangeNotifier{
+class RiverDataProvider extends Logics with ChangeNotifier {
 
   List<RiverDetails> _allRiversData = [];
 

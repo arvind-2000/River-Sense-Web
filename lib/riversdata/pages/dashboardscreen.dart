@@ -35,11 +35,11 @@ class DashboardScreen extends StatelessWidget {
                         flex: 1,
                         child: Container(
                         child: Row(
-                          children: riverProvider.allRiversDatalist.map((e) =>ViewRiverCard(onPress: (){
+                          children: riverProvider.allRiversDatalist.asMap().entries.map((e) =>ViewRiverCard(onPress: (){
 
-                              Navigator.pushNamed(context, RiverDetailScreen.routename,arguments: e);
+                              Navigator.pushNamed(context, RiverDetailScreen.routename,arguments: [e.key,e.value]);
 
-                          },riverDetails: e,)).toList(),
+                          },riverDetails: e.value,)).toList(),
                         ),
                         ),
                       ),

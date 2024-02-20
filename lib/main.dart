@@ -30,13 +30,13 @@ class MyApp extends StatelessWidget {
         title: 'River Sense',
         theme:lighttheme ,
         darkTheme: darktheme,
-        themeMode: ThemeMode.light,
+        themeMode: ThemeMode.dark,
         home: const RiverDataScreen(),
         
         routes: {
           RiverDetailScreen.routename:(context) => const RiverDetailScreen()
         },
-      ),
+      ), 
     );
   }
 }

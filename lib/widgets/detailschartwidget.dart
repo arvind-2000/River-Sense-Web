@@ -11,33 +11,32 @@ import '../riversdata/models/riverentities.dart';
 
 
 
-class LineCharts extends StatefulWidget {
-    LineCharts({
+class DetailsChartWidget extends StatefulWidget {
+    DetailsChartWidget({
     super.key,
     required this.isPinching,
     required this.showcolorindicator,
-    this.index = 0,
+    required this.data
   });
-  final int index;
   final bool isPinching;
   final bool showcolorindicator;
-
+  final List<RiverDetails> data;
   @override
-  State<LineCharts> createState() => _LineChartsState();
+  State<DetailsChartWidget> createState() => _LineChartsState();
 }
 
-class _LineChartsState extends State<LineCharts> {
+class _LineChartsState extends State<DetailsChartWidget> {
   int val = 20;
 
 
   @override
   Widget build(BuildContext context) {
-    final prov = Provider.of<GraphProvider>(context);
+   
     return Stack(
       children: [
         
 
-      prov.graphDataList[0].river.isEmpty?const SizedBox(
+      widget.data[0].river.isEmpty?const SizedBox(
         child: Center(child: Text('No Data'),),
        ):Container(
         // margin:const EdgeInsets.symmetric(horizontal: 16),
@@ -102,7 +101,7 @@ class _LineChartsState extends State<LineCharts> {
            ),
            initialVisibleMaximum: 13,
                 // axisLabelFormatter:(axisLabelRenderArgs) => ChartAxisLabel(prov.filtertype==0?months[int.parse(axisLabelRenderArgs.text)]:axisLabelRenderArgs.text, TextStyle(fontSize:12)),
-                axisLabelFormatter: prov.filtertype==0?(axisLabelRenderArgs) => ChartAxisLabel(months[int.parse(axisLabelRenderArgs.text)],const TextStyle(fontSize:12)) :null,
+                axisLabelFormatter:(axisLabelRenderArgs) => ChartAxisLabel(months[int.parse(axisLabelRenderArgs.text)],const TextStyle(fontSize:12)) ,
                   interval:1,
                   
                   // maximum: prov.filtertype==0?12:null,
@@ -119,7 +118,7 @@ class _LineChartsState extends State<LineCharts> {
             
                   
           ),
-          series: prov.graphDataList.asMap().entries.map((e) =>prov.islinegraph? linecharts(e.value, e.key,Theme.of(context).colorScheme.secondary,prov) :barcharts(e.value, e.key,Theme.of(context).colorScheme.secondary,prov) ).toList(),
+          series: widget.data.asMap().entries.map((e) =>barcharts(e.value, e.key,Theme.of(context).colorScheme.secondary) ).toList(),
          ),
        ),
        Positioned(
@@ -159,15 +158,15 @@ class _LineChartsState extends State<LineCharts> {
                 //     }, icon:const FaIcon(FontAwesomeIcons.minus,size: 16,),hoverColor: Theme.of(context).colorScheme.secondary,),
                 //   ]
                 // ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                // Container(
+                //   padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
 
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Theme.of(context).colorScheme.secondary.withOpacity(0.3)
-                  ),
-                  child: Text(prov.graphlevelindex==0?"Levels in $levelunit":prov.graphlevelindex==1?"Humidity in $humiditylevel":"Temperature in $templevel"),
-                )
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(16),
+                //     color: Theme.of(context).colorScheme.secondary.withOpacity(0.3)
+                //   ),
+                //   child: Text(prov.graphlevelindex==0?"Levels in $levelunit":prov.graphlevelindex==1?"Humidity in $humiditylevel":"Temperature in $templevel"),
+                // )
               ],
             ),
           ),
@@ -211,7 +210,7 @@ class _LineChartsState extends State<LineCharts> {
         ],
       );
 
-  SplineAreaSeries<River, int> linecharts(
+  SplineAreaSeries<River, int> DetailsChart(
     RiverDetails riversdata,
     int index,
     Color color,
@@ -289,7 +288,7 @@ class _LineChartsState extends State<LineCharts> {
     RiverDetails riversdata,
     int index,
     Color color,
-    GraphProvider prov
+  
   ) {
     return ColumnSeries(
         animationDelay: 1,
@@ -312,11 +311,12 @@ class _LineChartsState extends State<LineCharts> {
         xValueMapper: (datum, index) {
           return index;
         },
-        yValueMapper: (d, i) => toDouble(prov.graphlevelindex == 0
-            ? d.usv
-            : prov.graphlevelindex == 1
-                ? d.hv
-                : d.tv));
+        yValueMapper: (datum, index) => toDouble(datum.usv).roundToDouble());
+        // yValueMapper: (d, i) => toDouble(prov.graphlevelindex == 0
+        //     ? d.usv
+        //     : prov.graphlevelindex == 1
+        //         ? d.hv
+        //         : d.tv));
   }
 
 }
