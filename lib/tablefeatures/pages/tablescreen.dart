@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:riversenseweb/const.dart';
-import 'package:riversenseweb/graphfeatures/provider/graphprovider.dart';
+import 'package:riversenseweb/tablefeatures/provider/tableprovider.dart';
 import 'package:riversenseweb/widgets/errorscreen.dart';
 
 import '../../widgets/tablelist.dart';
@@ -12,17 +12,17 @@ class TableScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final prov = Provider.of<GraphProvider>(context);
-    return prov.graphDataList.isEmpty?ErrorScreen():Container(
+    final prov = Provider.of<TableProvider>(context);
+    return prov.tableDataList.isEmpty?ErrorScreen():Container(
 
         child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                   
-                      // prov.graphDataList!=0?Padding(
+                      // prov.tableDataList!=0?Padding(
                       //   padding: const EdgeInsets.symmetric(horizontal: 16),
-                      //   child: Text( prov.graphDataList==1?"${prov.graphchooseDate.year}":"${months[prov.graphchooseDate.month-1]} ${prov.graphchooseDate.year}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
+                      //   child: Text( prov.tableDataList==1?"${prov.date.year}":"${months[prov.date.month-1]} ${prov.date.year}",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16)),
                       // ):SizedBox(),
                        Container(
                         margin: EdgeInsets.all(16),
@@ -38,11 +38,11 @@ class TableScreen extends StatelessWidget {
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 children: [
-                                  //   const Center(child: FaIcon(FontAwesomeIcons.calendar,size: 16,)),
-                                  //   SizedBox(height: 3,),
-                                  // Center(child: Text(getDate(prov.date))),
+                                    const Center(child: FaIcon(FontAwesomeIcons.calendar,size: 16,)),
+                                    SizedBox(height: 3,),
+                                  Center(child: Text(getDate(prov.date))),
                                 
-                                  ...prov.graphDataList[0]
+                                  ...prov.tableDataList[prov.maxIndex]
                                       .river
                                       .map((e) => Padding(
                                             padding: const EdgeInsets.symmetric(
@@ -56,7 +56,7 @@ class TableScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            ...prov.graphDataList
+                            ...prov.tableDataList
                                 .asMap()
                                 .entries
                                 .map((e) =>

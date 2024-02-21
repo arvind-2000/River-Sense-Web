@@ -9,10 +9,11 @@ class GraphProvider with ChangeNotifier{
   List<RiverDetails> _graphdatalist = [];
   List<RiverDetails> get graphDataList =>_graphdatalist;
   int filtertype = 0;
-  DateTime date = DateTime(DateTime.now().year);
+  DateTime date = DateTime(DateTime.now().year,DateTime.now().month,);
   int graphRiverindex = 3;
   int graphlevelindex = 0;
   bool islinegraph = true;
+  int maxindex = 0;
 
   void setgraphdata(List<RiverDetails> setGraphlist){
 
@@ -46,6 +47,8 @@ else{
   _graphdatalist = logic.getDays(temp, date)..reversed;
   }
 notifyListeners();
+
+changeMaxIndex();
 }
 
 
@@ -74,6 +77,20 @@ void setDate(DateTime date){
 void changeGraphStyle(){
   islinegraph = !islinegraph;
   notifyListeners();
+}
+
+void changeMaxIndex(){
+if(_graphdatalist.length>1){
+for(int i = 0;i<_graphdatalist.length-1;i++){
+  if(_graphdatalist[i].river.length<_graphdatalist[i+1].river.length){
+    maxindex = i+1;
+  }else{
+    maxindex = i;
+  }
+}
+}
+
+notifyListeners();
 }
 
 }

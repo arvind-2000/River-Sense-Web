@@ -9,6 +9,7 @@ import 'package:riversenseweb/tablefeatures/pages/tablescreen.dart';
 import 'package:riversenseweb/widgets/smallcardwidget.dart';
 
 import '../../BarChartfeatures/pages/barchartscreen.dart';
+import '../../tablefeatures/pages/tablescreenpage.dart';
 import '../../widgets/viewrivercardwidget.dart';
 import '../provider/riverdataprovider.dart';
 import '../../graphfeatures/pages/graphscreendesktop.dart';
@@ -93,37 +94,7 @@ class DashboardScreen extends StatelessWidget {
                                       ),
                                     ),
                                   Divider(),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                                 const Padding(
-                                            padding: EdgeInsets.all(16.0),
-                                            child: Text("Data Reports",style: TextStyle(fontSize: 20),),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(child: Center(child: Text('Date'))),
-                                              ...riverProvider.allRiversDatalist.map((e) =>  Expanded(child: Center(child: Text(e.name.split(' ')[0]))),).toList()
-                                             
-                                          
-                                         
-                                            ],
-                                          ),
-                                          Expanded(
-                                            child: Container(
-                                              height: double.infinity,
-                                              margin: const EdgeInsets.only(top:16,bottom: 16,left: 8,right: 16),
-                                              decoration: BoxDecoration(
-                                                  color: Theme.of(context).colorScheme.primary,
-                                                borderRadius: BorderRadius.circular(16)
-                                              ),
-                                              child: TableScreen(),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    TableScreenPage(),
                                   ],
                                 ),
                               ),
@@ -141,6 +112,8 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 }
+
+
 
 class BarChartWidget extends StatelessWidget {
   const BarChartWidget({

@@ -101,7 +101,7 @@ class _LineChartsState extends State<DetailsChartWidget> {
            ),
            initialVisibleMaximum: 13,
                 // axisLabelFormatter:(axisLabelRenderArgs) => ChartAxisLabel(prov.filtertype==0?months[int.parse(axisLabelRenderArgs.text)]:axisLabelRenderArgs.text, TextStyle(fontSize:12)),
-                axisLabelFormatter:(axisLabelRenderArgs) => ChartAxisLabel(months[int.parse(axisLabelRenderArgs.text)],const TextStyle(fontSize:12)) ,
+                // axisLabelFormatter:(axisLabelRenderArgs) => ChartAxisLabel(months[int.parse(axisLabelRenderArgs.text)],const TextStyle(fontSize:12)) ,
                   interval:1,
                   
                   // maximum: prov.filtertype==0?12:null,

@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:riversenseweb/graphfeatures/business/logics.dart';
 import 'package:riversenseweb/riversdata/models/riverdetailsentity.dart';
 
-class TableProvider with ChangeNotifier{
+class TableProvider extends Logics with ChangeNotifier{
   List<RiverDetails> _riverDataList = [];
-  List<RiverDetails> _graphdatalist = [];
-  List<RiverDetails> get graphDataList =>_graphdatalist;
-  int filtertype = 0;
-  DateTime date = DateTime(DateTime.now().year);
+List<RiverDetails> _tabledatalist = [];
+  List<RiverDetails> get tableDataList =>_tabledatalist;
+  int filtertype = 1;
+  DateTime date = DateTime(DateTime.now().year,DateTime.now().month,);
   int graphRiverindex = 3;
   int graphlevelindex = 3;
+  int maxIndex = 0;
 
+  void settabledata(List<RiverDetails> setTablelist){
 
-  void settabledata(List<RiverDetails> setGraphlist){
-
-   _riverDataList = setGraphlist;
-    notifyListeners();
+   _riverDataList = setTablelist;
+    
+  notifyListeners();
+  
   changeData();
  
   
@@ -38,11 +40,13 @@ void changeData(){
   }
 
   if(filtertype==0){
-_graphdatalist = logic.getMonths(temp,date);
+_tabledatalist = logic.getMonths(temp,date);
 }
 else{
-  _graphdatalist = logic.getDays(temp, date);
+  _tabledatalist = logic.getDays(temp, date);
   }
+  maxIndex = getMaxIndex(_tabledatalist);
+notifyListeners();
 
 }
 

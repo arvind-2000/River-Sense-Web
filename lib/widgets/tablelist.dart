@@ -30,11 +30,11 @@ class TableList extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-          //  Center(child: Text(filterRiver.name.split(' ')[0])),
-          //  Padding(
-          //    padding: EdgeInsets.symmetric(horizontal:16.0),
-          //    child: Center(child: Text(prov.graphlevelindex==0?'USV':prov.graphlevelindex==1?'HV':'TV')),
-          //  ),
+           Center(child: Text(filterRiver.name.split(' ')[0])),
+           Padding(
+             padding: EdgeInsets.symmetric(horizontal:16.0),
+             child: Center(child: Text(prov.graphlevelindex==0?'USV':prov.graphlevelindex==1?'HV':'TV')),
+           ),
             ListView(
              shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),

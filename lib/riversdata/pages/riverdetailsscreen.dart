@@ -1,10 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:riversenseweb/const.dart';
+import 'package:riversenseweb/graphfeatures/provider/graphprovider.dart';
 import 'package:riversenseweb/riversdata/models/riverdetailsentity.dart';
+import 'package:riversenseweb/riversdata/models/riverentities.dart';
+import 'package:riversenseweb/riversdata/provider/riverdataprovider.dart';
 import 'package:riversenseweb/widgets/detailschartwidget.dart';
-import 'package:riversenseweb/widgets/linechartwidget2.dart';
 import 'package:riversenseweb/widgets/tables.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class RiverDetailScreen extends StatefulWidget {
   const RiverDetailScreen({
@@ -24,7 +28,8 @@ class _RiverDetailScreenState extends State<RiverDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as List<dynamic>;
-
+    final prov = Provider.of<GraphProvider>(context);
+    final prov2 = Provider.of<RiverDataProvider>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
     
@@ -103,7 +108,78 @@ class _RiverDetailScreenState extends State<RiverDetailScreen> {
                                     
                                     Text('$checktime minutes interval',style: TextStyle(fontSize: 12,color: Theme.of(context).colorScheme.surface.withOpacity(0.6))),
                                     SizedBox(height: 20,),
-                                    LineCharts(isPinching: false, showcolorindicator:true),
+                                    SfCartesianChart(
+           
+            zoomPanBehavior: ZoomPanBehavior(
+         
+              enableMouseWheelZooming: true,
+              enablePanning: true,
+              
+              // maximumZoomLevel: 1,  
+              // enablePinching: true,
+           
+              zoomMode: ZoomMode.x,
+              enableSelectionZooming: true
+         
+            ),
+
+            tooltipBehavior: TooltipBehavior(enable: true,
+            color: Theme.of(context).colorScheme.primary,
+            textStyle: TextStyle(color: Theme.of(context).colorScheme.surface)
+            ),
+            borderWidth: 0,
+        
+            borderColor: Colors.transparent,
+            margin: EdgeInsets.zero,
+            plotAreaBorderColor: Colors.transparent,
+            plotAreaBorderWidth: 0,
+            // title: ChartTitle(
+            //   text: prov.graphDataList[0].name,
+            //   alignment: ChartAlignment.near,
+            //   borderWidth: 8
+            // ),
+            enableAxisAnimation: true,
+
+            
+            primaryYAxis:const NumericAxis(
+    
+                 majorGridLines: MajorGridLines(
+            
+             width: 0
+           ),
+            desiredIntervals: 10,
+
+              minimum: 0.0,
+              interval: 50,
+              maximum: 300,
+              
+            ),
+          primaryXAxis: NumericAxis(
+               majorGridLines: MajorGridLines(
+                 
+             width: 0
+           ),
+           initialVisibleMaximum: 13,
+                // axisLabelFormatter:(axisLabelRenderArgs) => ChartAxisLabel(prov.filtertype==0?months[int.parse(axisLabelRenderArgs.text)]:axisLabelRenderArgs.text, TextStyle(fontSize:12)),
+                axisLabelFormatter: prov.filtertype==0?(axisLabelRenderArgs) => ChartAxisLabel(months[int.parse(axisLabelRenderArgs.text)],const TextStyle(fontSize:12)) :null,
+                  interval:1,
+                  
+                  // maximum: prov.filtertype==0?12:null,
+                  title: AxisTitle(
+                  
+                    text: "Time"
+                  ),
+                  autoScrollingMode:AutoScrollingMode.end,
+                  // autoScrollingDelta: val,
+
+            // initialZoomPosition: 1,
+            // initialZoomFactor: 0.2,
+           
+            
+                  
+          ),
+          series:prov2.getMonths([prov2.allRiversDatalist[args[0]]],DateTime.now()) .asMap().entries.map((e) =>linecharts(e.value, e.key,Theme.of(context).colorScheme.secondary,prov) ).toList(),
+         ),
                                   ],
                                 )
                               ),
@@ -133,6 +209,48 @@ class _RiverDetailScreenState extends State<RiverDetailScreen> {
     
     );
   }
+
+    SplineAreaSeries<River, int> linecharts(
+    RiverDetails riversdata,
+    int index,
+    Color color,
+    GraphProvider prov
+  ) {
+    return SplineAreaSeries(
+        animationDelay: 1,
+        animationDuration: 0.3,
+        enableTooltip: true,
+        markerSettings: MarkerSettings(
+          isVisible: true,
+          
+          color:color.withOpacity(0.4),
+          borderWidth: 0,
+          shape: DataMarkerType.circle
+        ),
+        borderColor: rivercolors[index]!,
+        borderWidth: 2,
+        splineType: SplineType.cardinal,
+        cardinalSplineTension: 0.3,
+        gradient: LinearGradient(
+            colors: [rivercolors[index]!.withOpacity(0.2), Colors.transparent],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter),
+        dataSource: riversdata.river,
+        emptyPointSettings: EmptyPointSettings(
+          mode: EmptyPointMode.average
+          
+        ),
+        xValueMapper: (datum, index) {
+          return index;
+        },
+      
+        yValueMapper: (d, i) => toDouble(prov.graphlevelindex == 0
+            ? d.usv
+            : prov.graphlevelindex == 1
+                ? d.hv
+                : d.tv));
+  }
+  
 }
 
 class BreakOutListCard extends StatelessWidget {
@@ -268,4 +386,9 @@ class DetailLevelsWidget extends StatelessWidget {
                               ),
     );
   }
+
+
+
+
+
 }

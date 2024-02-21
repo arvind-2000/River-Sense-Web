@@ -100,9 +100,9 @@ class _LineChartsState extends State<LineCharts> {
                  
              width: 0
            ),
-           initialVisibleMaximum: 13,
+         
                 // axisLabelFormatter:(axisLabelRenderArgs) => ChartAxisLabel(prov.filtertype==0?months[int.parse(axisLabelRenderArgs.text)]:axisLabelRenderArgs.text, TextStyle(fontSize:12)),
-                axisLabelFormatter: prov.filtertype==0?(axisLabelRenderArgs) => ChartAxisLabel(months[int.parse(axisLabelRenderArgs.text)],const TextStyle(fontSize:12)) :null,
+                axisLabelFormatter: prov.filtertype==0?(axisLabelRenderArgs) => ChartAxisLabel(  months[prov.graphDataList[prov.maxindex].river[int.parse(axisLabelRenderArgs.text)].date.month-1],const TextStyle(fontSize:12)) :(axisLabelRenderArgs) => ChartAxisLabel(  prov.graphDataList[prov.maxindex].river[int.parse(axisLabelRenderArgs.text)].date.day.toString(),const TextStyle(fontSize:12)) ,
                   interval:1,
                   
                   // maximum: prov.filtertype==0?12:null,

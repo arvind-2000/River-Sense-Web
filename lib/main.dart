@@ -8,6 +8,8 @@ import 'package:riversenseweb/riversdata/pages/riverdetailsscreen.dart';
 import 'package:riversenseweb/riversdata/provider/riverdataprovider.dart';
 import 'package:riversenseweb/riversdata/provider/selectionprovider.dart';
 
+import 'tablefeatures/provider/tableprovider.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -22,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (c)=>RiverDataProvider()),
         ChangeNotifierProvider(create: (c)=>GraphProvider()),
+        ChangeNotifierProvider(create: (c)=>TableProvider()),
         ChangeNotifierProvider(create: (c)=>SelectionProvider()),
         
         ],

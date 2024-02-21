@@ -178,4 +178,38 @@ class Logics{
 
  }
 
+ int getMaxIndex(List<RiverDetails> d){
+  int index = 0;
+  if(d.length == 1||d.isEmpty){
+    return index;
+  }
+  for(int i = 0;i<d.length-1;i++){
+    if(d[i].river.length>d[i+1].river.length){
+      index = i;
+    }else{
+      index = i+1;
+    }
+
+
+  }
+
+  return index;
+ }
+
+
+void getMaxDatapoints(List<River> river){
+
+
+
+}
+
+void getAvgDatapoints(List<River> river){
+
+
+ 
+
+}
+
+
+
 }

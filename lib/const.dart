@@ -34,8 +34,7 @@ List<Color?> rivercolors = [Colors.greenAccent,Colors.blueAccent,Colors.redAccen
 List<String>  months = ['Jan','Feb','Mar','Apl','May','June','July','Aug','Sep','Oct','Nov','Dec'];
 const alertbannertext = 'Danger';
 
-const String graphdetail = '''This is the datapoints for all the rivers, gathered from the sensor device.
-It is filtered out and shown only the related datapoints.
+const String graphdetail = '''Datapoints for all the rivers.
 For more specific data. Press the filter button on the right.''';
 const String tabledetail = '''This is the datapoints for all the rivers, gathered from the sensor device.
 It is filtered out and shown only the related datapoints.
