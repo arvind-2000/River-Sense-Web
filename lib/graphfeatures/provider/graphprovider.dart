@@ -41,10 +41,10 @@ void changeData(){
   }
 
   if(filtertype==0){
-_graphdatalist = logic.getMonths(temp,date)..reversed;
+_graphdatalist = logic.getMonths(temp,date);
 }
 else{
-  _graphdatalist = logic.getDays(temp, date)..reversed;
+  _graphdatalist = logic.getDays(temp, date);
   }
 notifyListeners();
 

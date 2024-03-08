@@ -45,7 +45,7 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
     clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(16)
+        borderRadius: BorderRadius.circular(8)
       ),
 
       child:Row(
@@ -63,10 +63,10 @@ class _GraphScreenDesktopState extends State<GraphScreenDesktop> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Monthly River Levels",style: TextStyle(fontSize: 24,letterSpacing: 3),),
+                          const Text("River Levels",style: TextStyle(fontSize: 24,letterSpacing: 3),),
                           SizedBox(height: 10,),
-                          Text(graphdetail,style: TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.surface.withOpacity(0.6)),),
-                          const SizedBox(height: 20,),
+                          // Text(graphdetail,style: TextStyle(fontSize: 14,color: Theme.of(context).colorScheme.surface.withOpacity(0.6)),),
+                          // const SizedBox(height: 20,),
                           Text(graphprovider.graphRiverindex<=2?riverprovider.allRiversDatalist[graphprovider.graphRiverindex].name:"All Rivers",style:const TextStyle(fontWeight: FontWeight.bold),),
                         ],
                       ),

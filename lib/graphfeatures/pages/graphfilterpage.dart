@@ -25,7 +25,7 @@ class GraphFilterPage extends StatelessWidget {
     
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(16)
+        borderRadius: BorderRadius.circular(8)
         
       ),
       child: SingleChildScrollView(
@@ -47,7 +47,7 @@ class GraphFilterPage extends StatelessWidget {
                }, icon:const  FaIcon(FontAwesomeIcons.xmark,size: 12,))
             ],
           ),
-          Divider(),
+          Divider(color: Theme.of(context).colorScheme.surface.withOpacity(0.4),),
             const SizedBox(height: 20,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

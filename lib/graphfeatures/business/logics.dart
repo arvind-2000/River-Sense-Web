@@ -82,7 +82,7 @@ class Logics{
         temp = k.date.year;
       }
     }
-
+   tempo.sort((a, b) => a.date.compareTo(b.date));
       riv.add(RiverDetails(id: i.id, name: i.name, river: tempo));
   }
 
@@ -115,7 +115,7 @@ class Logics{
       
         }
     }
-
+   tempo.sort((a, b) => a.date.compareTo(b.date));
       riv.add(RiverDetails(id: i.id, name: i.name, river: tempo));
   }
 
@@ -139,6 +139,7 @@ class Logics{
             }
         }
         print("Logic : In filter days:${riverlist.length}");
+          riverlist.sort((a, b) => a.date.compareTo(b.date));
         filterriver.add(RiverDetails(id: riv.id, name: riv.name, river: riverlist));
     }
     return filterriver;
@@ -168,7 +169,7 @@ class Logics{
       
         }
     }
-
+        tempo.sort((a, b) => a.date.compareTo(b.date));
       riv.add(RiverDetails(id: i.id, name: i.name, river: tempo));
   }
 

@@ -57,37 +57,9 @@ class _RiverDetailScreenState extends State<RiverDetailScreen> {
                               ),
                               child: Column(
                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text("Break Outs",style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
-                                  Row(children: List.generate(DateTime.now().year - 2022, (index) => Container( 
-                                    padding: EdgeInsets.only(right: 16),
-                                    child: Text('${2023+index}')))),
-                                    Expanded(
-                                      child: Container(
-                                        child: Stack(
-                                          children: [
-                                        
-                                            Positioned(
-                                        
-                                              child: Expanded(
-                                                child: Container(
-                                                width: 2,
-                                                height: double.infinity,
-                                                color: Theme.of(context).colorScheme.secondary,
-                                                                                            ),
-                                              )),
-
-                                            ListView(
-                                              shrinkWrap: true,
-                                              children: [1,2,3,4,5,6,7,8,9,].map((e) =>BreakOutListCard(args:e)).toList(),
-                                            ),
-
-                           
-
-                                          ],
-                                        ),
-                                      ),
-                                    )
+                                children: [  
+                                  Text("${args[1].name}",style: const TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+                                  
                                 ],
                               )),
                           ),

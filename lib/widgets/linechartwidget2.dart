@@ -44,11 +44,7 @@ class _LineChartsState extends State<LineCharts> {
         // padding:const EdgeInsets.only(left: 24,top: 16),
         padding: EdgeInsets.only(right:16),
        
-        decoration: BoxDecoration(
-          
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(16)
-        ),
+        
          child: SfCartesianChart(
            
             zoomPanBehavior: ZoomPanBehavior(
@@ -102,7 +98,7 @@ class _LineChartsState extends State<LineCharts> {
            ),
          
                 // axisLabelFormatter:(axisLabelRenderArgs) => ChartAxisLabel(prov.filtertype==0?months[int.parse(axisLabelRenderArgs.text)]:axisLabelRenderArgs.text, TextStyle(fontSize:12)),
-                axisLabelFormatter: prov.filtertype==0?(axisLabelRenderArgs) => ChartAxisLabel(  months[prov.graphDataList[prov.maxindex].river[int.parse(axisLabelRenderArgs.text)].date.month-1],const TextStyle(fontSize:12)) :(axisLabelRenderArgs) => ChartAxisLabel(  prov.graphDataList[prov.maxindex].river[int.parse(axisLabelRenderArgs.text)].date.day.toString(),const TextStyle(fontSize:12)) ,
+                axisLabelFormatter: prov.filtertype==0?(axisLabelRenderArgs) => ChartAxisLabel(  months[prov.graphDataList[prov.maxindex].river[int.parse(axisLabelRenderArgs.text)].date.month-1],const TextStyle(fontSize:12)) :(axisLabelRenderArgs) => ChartAxisLabel(  prov.graphDataList[prov.graphRiverindex>2?prov.maxindex:0].river[int.parse(axisLabelRenderArgs.text)].date.day.toString(),const TextStyle(fontSize:12)) ,
                   interval:1,
                   
                   // maximum: prov.filtertype==0?12:null,
